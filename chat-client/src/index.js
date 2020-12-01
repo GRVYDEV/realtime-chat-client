@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createClient, Provider } from "urql";
-
+import SocketProvider from "./providers/SocketProvider";
 const client = createClient({
   url: "http://localhost:4000/api/",
 });
@@ -12,7 +12,9 @@ const client = createClient({
 ReactDOM.render(
   <React.StrictMode>
     <Provider value={client}>
-      <App />
+      <SocketProvider wsUrl="ws://localhost:4000/socket">
+        <App />
+      </SocketProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
